@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Muestra de invitación digital de XV años. Datos de ejemplo.">
+<title>XV de Sofía</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600&family=Jost:wght@400;500&family=Tangerine:wght@700&display=swap">
+<style>
+:root{
+  --noche:#080B1E; --velo:rgba(14,20,44,.72); --turquesa:#35C2B1;
+  --oro:#E0B75C; --oro-claro:#F6DE9E; --marfil:#F6EEDD; --tenue:#AFB9CE;
+  --linea:rgba(224,183,92,.28); --sombra:0 1px 14px rgba(4,6,16,.8);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:#16405F; color:var(--marfil);
+  font-family:"Amiri",Georgia,serif; font-size:19px; line-height:1.66; overflow-x:hidden;
+  text-shadow:var(--sombra);
+}
+img{max-width:100%}
+canvas#desierto{position:fixed; inset:0; z-index:0; pointer-events:none}
+
+.franja{position:relative; z-index:2; background:rgba(6,9,22,.88); border-bottom:1px solid var(--linea);
+  font-family:"Jost",system-ui,sans-serif; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--tenue); text-align:center; padding:8px 16px; text-shadow:none}
+.franja b{color:var(--oro); font-weight:500}
+
+.hoja{position:relative; z-index:1; max-width:620px; margin:0 auto; padding-inline:22px}
+section{padding-block:54px; border-bottom:1px solid var(--linea)}
+section:last-of-type{border-bottom:none}
+
+.rotulo{font-family:"Cinzel",serif; font-size:10px; letter-spacing:.32em; text-transform:uppercase; color:var(--oro-claro); margin:0}
+h1{font-family:"Tangerine",cursive; font-weight:700; font-size:clamp(5rem,26vw,8.5rem); line-height:.82;
+   color:#FFF7E4; margin:16px 0 0; text-shadow:0 0 44px rgba(255,214,130,.55), 0 2px 16px rgba(4,6,16,.8)}
+h2{font-family:"Cinzel",serif; font-weight:600; font-size:1.18rem; letter-spacing:.12em; text-transform:uppercase;
+   color:var(--oro-claro); margin:0 0 6px; text-align:center; text-wrap:balance}
+p{margin:0 0 14px}
+.centro{text-align:center}
+.tenue{color:var(--tenue)}
+.filo{width:120px; height:1px; margin:20px auto; background:linear-gradient(90deg,transparent,var(--oro),transparent)}
+.celosia{height:24px; margin:0 auto 6px; max-width:200px; opacity:.6;
+  background-repeat:repeat-x; background-position:center; background-size:auto 24px}
+
+/* ---- portada ---- */
+.portada{text-align:center; padding-block:44px 46px; border-bottom:1px solid var(--linea)}
+.apellido{font-family:"Cinzel",serif; font-size:12px; letter-spacing:.3em; text-transform:uppercase; margin:22px 0 0}
+.quince{font-family:"Cinzel",serif; font-size:2.4rem; letter-spacing:.24em; color:var(--oro-claro); margin:4px 0 0; padding-left:.24em}
+.fecha{font-size:1.18rem; margin:14px 0 0}
+.lema{font-family:"Tangerine",cursive; font-size:2.7rem; line-height:1.15; color:#FFEFC9; margin:14px 0 0}
+
+/* ---- marco de la foto (arco) ---- */
+.marco{display:block; width:196px; height:256px; margin:26px auto 0; padding:0; cursor:pointer;
+  border:2px solid var(--oro); border-radius:50% 50% 14px 14px / 56% 56% 14px 14px;
+  background:rgba(8,12,30,.52); overflow:hidden; position:relative;
+  box-shadow:0 0 0 5px rgba(8,12,30,.45), 0 0 34px rgba(224,183,92,.28), inset 0 0 26px rgba(0,0,0,.45)}
+.marco img{width:100%; height:100%; object-fit:cover; display:block}
+.marco-vacio{position:absolute; inset:0; display:grid; place-items:center; padding:16px 12px 26px}
+.lampara{width:100%; max-width:158px; height:auto; overflow:visible}
+.marco:focus-visible{outline:2px solid var(--turquesa); outline-offset:5px}
+.aliento{animation:aliento 5s ease-in-out infinite}
+.humo{animation:humo 7s ease-in-out infinite}
+.lustre{animation:lustre 8s ease-in-out infinite}
+@keyframes aliento{0%,100%{opacity:.34} 50%{opacity:.8}}
+@keyframes humo{0%{opacity:0; transform:translateY(5px)} 35%{opacity:.75} 100%{opacity:0; transform:translateY(-9px)}}
+@keyframes lustre{0%,62%,100%{opacity:.16} 74%{opacity:.85}}
+@media (prefers-reduced-motion:reduce){ .aliento,.humo,.lustre{animation:none} .humo{opacity:.5} }
+.pie-marco{font-family:"Jost",sans-serif; font-size:12.5px; color:var(--tenue); margin:12px 0 0; text-shadow:var(--sombra)}
+
+/* ---- cuenta regresiva ---- */
+.cuenta{display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin:20px 0 14px}
+.cuenta div{background:var(--velo); border:1px solid rgba(53,194,177,.32); border-radius:13px; padding:14px 4px; text-align:center}
+.cuenta .n{font-family:"Jost",sans-serif; font-weight:500; font-size:2rem; line-height:1; color:var(--oro-claro); font-variant-numeric:tabular-nums}
+.cuenta .u{font-family:"Cinzel",serif; font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--tenue); margin-top:7px}
+
+/* ---- tarjetas y controles ---- */
+.tarjeta{background:var(--velo); border:1px solid var(--linea); border-radius:16px; padding:22px; backdrop-filter:blur(4px)}
+.boton{cursor:pointer; font-family:"Jost",sans-serif; font-size:14px; font-weight:500; letter-spacing:.02em;
+  border:1px solid var(--oro); border-radius:999px; padding:12px 24px; text-shadow:none;
+  background:linear-gradient(135deg,var(--oro),var(--oro-claro)); color:#241C05;
+  text-decoration:none; display:inline-block; text-align:center}
+.boton.hueco{background:rgba(8,12,30,.5); color:var(--oro-claro)}
+.boton:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--turquesa); outline-offset:3px}
+.par{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:16px}
+label{display:block; font-family:"Cinzel",serif; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--tenue); margin:14px 0 6px}
+input,textarea{width:100%; font:inherit; font-size:16px; padding:11px 14px; border-radius:11px; text-shadow:none;
+  border:1px solid var(--linea); background:rgba(6,9,22,.62); color:var(--marfil)}
+textarea{min-height:82px; resize:vertical}
+.aviso-chico{font-family:"Jost",sans-serif; font-size:12.5px; color:var(--tenue); margin-top:12px; min-height:19px; text-align:center}
+.pases{color:var(--turquesa); font-weight:700}
+
+/* ---- muro ---- */
+.muro{display:flex; flex-direction:column; gap:2px; margin-top:22px}
+.nota{border-left:2px solid var(--oro); padding:8px 0 8px 16px}
+.nota b{font-family:"Cinzel",serif; font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; color:var(--oro-claro)}
+.nota p{margin:2px 0 0; font-style:italic}
+
+/* ---- galería ---- */
+.rejilla{display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:8px; margin-top:18px}
+.rejilla img, .rejilla canvas{width:100%; aspect-ratio:1; object-fit:cover; border-radius:11px;
+  border:1px solid var(--linea); display:block}
+
+/* ---- regalos ---- */
+.linea-dato{display:flex; justify-content:space-between; gap:16px; padding:9px 0; border-bottom:1px dashed var(--linea)}
+.linea-dato:last-of-type{border-bottom:none}
+.linea-dato span:first-child{font-family:"Cinzel",serif; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--tenue); padding-top:5px; flex:none}
+.linea-dato span:last-child{font-family:"Jost",sans-serif; font-size:15px; text-align:right}
+
+/* ---- lugar ---- */
+.lugar-nom{font-family:"Cinzel",serif; font-size:1.3rem; letter-spacing:.08em; margin:8px 0 2px}
+.wa{display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#062E13; text-decoration:none;
+  padding:13px 24px; border-radius:999px; font-family:"Jost",sans-serif; font-weight:500; font-size:14px; text-shadow:none}
+.wa svg{width:19px; height:19px; fill:#062E13}
+
+footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
+.firma{font-family:"Tangerine",cursive; font-size:4rem; color:var(--oro-claro); line-height:1}
+
+.fab{position:fixed; left:16px; bottom:16px; z-index:5; width:54px; height:54px; border-radius:50%;
+  display:grid; place-items:center; cursor:pointer; border:1px solid var(--oro);
+  background:linear-gradient(135deg,var(--oro),var(--oro-claro)); box-shadow:0 10px 28px rgba(0,0,0,.55)}
+.fab svg{width:23px; height:23px; fill:#241C05}
+.fab[aria-pressed="false"]{background:rgba(8,12,30,.7); border-color:var(--linea)}
+.fab[aria-pressed="false"] svg{fill:var(--tenue)}
+
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} h1{text-shadow:var(--sombra)} }
+/* imprescindible fuera de Artifacts: las clases ganan a [hidden] por especificidad */
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+
+<div class="franja">Muestra de demostración · <b>datos de ejemplo</b></div>
+
+<canvas id="desierto" aria-hidden="true"></canvas>
+
+<div class="hoja">
+
+  <header class="portada">
+    <p class="rotulo">Una noche de mil y una historias</p>
+
+    <button class="marco" id="marco" aria-label="Poner una foto de la quinceañera">
+      <img id="foto" alt="Foto de la quinceañera" hidden>
+      <span class="marco-vacio" id="marcoVacio">
+        <svg class="lampara" viewBox="0 0 140 112" aria-hidden="true">
+          <defs>
+            <linearGradient id="laton" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FCEFC4"/>
+              <stop offset=".42" stop-color="#E0B75C"/>
+              <stop offset="1" stop-color="#8A6220"/>
+            </linearGradient>
+            <radialGradient id="resplandor" cx="50%" cy="56%" r="50%">
+              <stop offset="0" stop-color="#FFD98A" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#FFD98A" stop-opacity="0"/>
+            </radialGradient>
+            <g id="khatam">
+              <rect x="-3.2" y="-3.2" width="6.4" height="6.4"/>
+              <rect x="-3.2" y="-3.2" width="6.4" height="6.4" transform="rotate(45)"/>
+            </g>
+          </defs>
+
+          <ellipse class="aliento" cx="70" cy="64" rx="66" ry="46" fill="url(#resplandor)"/>
+          <ellipse cx="70" cy="99" rx="30" ry="5" fill="#04060F" opacity=".45"/>
+
+          <!-- humo que escapa del pico -->
+          <path class="humo" d="M14 32 C9 24 18 20 13 11 C10 5 17 3 21 1"
+                fill="none" stroke="#F6DE9E" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>
+
+          <!-- asa en arco ojival -->
+          <path d="M96 57 C116 48 128 61 121 74 C117 82 108 85 100 82"
+                fill="none" stroke="url(#laton)" stroke-width="7" stroke-linecap="round"/>
+
+          <!-- pico recto con boca abocinada -->
+          <path d="M39 56 C27 54 16 47 8 38 L19 32 C25 42 32 49 41 52 Z" fill="url(#laton)"/>
+
+          <!-- cuerpo -->
+          <path d="M36 65 C36 52 48 45 70 45 C92 45 102 52 102 65 C102 79 90 87 70 87
+                   C50 87 36 79 36 65 Z" fill="url(#laton)"/>
+          <path d="M53 87 L87 87 L91 94 Q70 99 49 94 Z" fill="url(#laton)"/>
+
+          <!-- tapa con cúpula y aguja, como el alminar del horizonte -->
+          <path d="M57 46 C57 36 63 31 70 31 C77 31 83 36 83 46 Z" fill="url(#laton)"/>
+          <path d="M68 31 L68 24 Q70 20 72 24 L72 31 Z" fill="url(#laton)"/>
+          <circle cx="70" cy="19" r="2.8" fill="#F6DE9E"/>
+
+          <!-- grabados -->
+          <g fill="none" stroke="#5E3F12" stroke-width="1.3" opacity=".62">
+            <path d="M40 60 C54 67 86 67 99 60"/>
+            <path d="M44 76 C56 82 84 82 96 76"/>
+          </g>
+          <g fill="none" stroke="#5E3F12" stroke-width="1.1" opacity=".55">
+            <use href="#khatam" x="57" y="69"/>
+            <use href="#khatam" x="70" y="70"/>
+            <use href="#khatam" x="83" y="69"/>
+          </g>
+
+          <!-- lustre del latón pulido -->
+          <path class="lustre" d="M46 57 C52 51 62 49 72 50" fill="none"
+                stroke="#FFF8E0" stroke-width="4" stroke-linecap="round" opacity=".16"/>
+        </svg>
+      </span>
+    </button>
+    <input type="file" id="archivoFoto" accept="image/*" hidden>
+    <p class="pie-marco" id="pieMarco">Frota la lámpara: toca para poner aquí tu foto.</p>
+
+    <h1>Sofía</h1>
+    <div class="apellido">Ramírez Bustos</div>
+    <div class="filo"></div>
+    <div class="quince">XV</div>
+    <div class="fecha">Sábado 14 de marzo, 2027 · 20:00</div>
+    <p class="lema">Te espero al caer el sol</p>
+  </header>
+
+  <section>
+    <h2>Cuenta regresiva</h2>
+    <div class="celosia" id="cel1"></div>
+    <div class="cuenta">
+      <div><div class="n" id="cd-d">—</div><div class="u">Días</div></div>
+      <div><div class="n" id="cd-h">—</div><div class="u">Horas</div></div>
+      <div><div class="n" id="cd-m">—</div><div class="u">Min</div></div>
+      <div><div class="n" id="cd-s">—</div><div class="u">Seg</div></div>
+    </div>
+    <p class="centro tenue" style="margin:0">Cada noche que pasa nos deja más cerca.</p>
+  </section>
+
+  <section>
+    <h2>Confirma tu asistencia</h2>
+    <div class="celosia" id="cel2"></div>
+    <div class="tarjeta centro">
+      <p style="margin-bottom:6px">Hola, <b style="color:var(--oro-claro)">familia Muñoz</b>.</p>
+      <p id="reserva">Tienes <span class="pases">4 pases</span> reservados para esta noche.</p>
+      <div id="formRsvp">
+        <label for="comentario">¿Quieres decirme algo?</label>
+        <textarea id="comentario" placeholder="¡Ahí estaremos!"></textarea>
+        <div class="par">
+          <button class="boton" id="btnSi">Sí, ahí estaremos</button>
+          <button class="boton hueco" id="btnNo">No podremos ir</button>
+        </div>
+      </div>
+      <div class="aviso-chico" id="msgRsvp"></div>
+    </div>
+    <p class="aviso-chico" style="margin-top:14px">Cada familia recibe su propio enlace con su nombre y sus pases. Nadie confirma por otro.</p>
+  </section>
+
+  <section>
+    <h2>Déjame unas palabras</h2>
+    <div class="celosia" id="cel3"></div>
+    <div class="tarjeta">
+      <label for="fNombre">Tu nombre</label>
+      <input id="fNombre" placeholder="Tu nombre">
+      <label for="fMensaje">Mensaje</label>
+      <textarea id="fMensaje" placeholder="Escribe algo bonito…"></textarea>
+      <div class="par"><button class="boton" id="btnNota">Enviar</button></div>
+      <div class="aviso-chico" id="msgNota"></div>
+    </div>
+    <div class="muro" id="muro"></div>
+  </section>
+
+  <section>
+    <h2>Galería de la noche</h2>
+    <div class="celosia" id="cel4"></div>
+    <p class="centro tenue" style="margin-bottom:0">Sube aquí tus fotos y videos de la fiesta. Sin instalar nada.</p>
+    <div class="par">
+      <input type="file" id="archivo" accept="image/*,video/*" multiple hidden>
+      <button class="boton hueco" id="btnElegir">Elegir fotos o video</button>
+    </div>
+    <div class="aviso-chico" id="msgGal"></div>
+    <div class="rejilla" id="rejilla"></div>
+    <p class="aviso-chico" style="margin-top:14px">Los mosaicos son decorativos: aquí aparecerán las fotos reales de los invitados.</p>
+  </section>
+
+  <section>
+    <h2>Regalos</h2>
+    <div class="celosia" id="cel5"></div>
+    <p class="centro tenue">Tu presencia es lo que importa. Si igual quieres regalar algo, aquí están los datos.</p>
+    <div class="tarjeta">
+      <div class="linea-dato"><span>Titular</span><span>María Bustos Aravena</span></div>
+      <div class="linea-dato"><span>Banco</span><span>Banco Estado</span></div>
+      <div class="linea-dato"><span>Tipo de cuenta</span><span>Cuenta Vista</span></div>
+      <div class="linea-dato"><span>Número</span><span>000 1234 5678</span></div>
+      <div class="par"><button class="boton hueco" id="btnCopiar">Copiar datos</button></div>
+      <div class="aviso-chico" id="msgCopia"></div>
+    </div>
+  </section>
+
+  <section class="centro">
+    <h2>El lugar</h2>
+    <div class="celosia" id="cel6"></div>
+    <div class="lugar-nom">Salón Al-Nur</div>
+    <p class="tenue">Av. Los Jazmines 1201, Puerto Montt</p>
+    <p><a class="boton hueco" href="https://www.google.com/maps/search/?api=1&query=Puerto+Montt" target="_blank" rel="noopener">Ver en el mapa</a></p>
+    <div class="filo"></div>
+    <p class="rotulo">Código de vestimenta</p>
+    <p style="margin-top:6px">Elegante · tonos joya</p>
+    <p style="margin-top:26px">
+      <a class="wa" href="https://wa.me/56900000000" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.2 1.6z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="firma">Sofía</div>
+  <p class="tenue" style="margin-top:8px">Gracias por acompañarme</p>
+</footer>
+
+<button class="fab" id="fabMusica" aria-pressed="false" aria-label="Música de fondo">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55A4 4 0 108 17V7h6V3h-2z"/></svg>
+</button>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var lento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ===== celosía: estrella de ocho puntas (khatam) ===== */
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 48 24">'
+    + '<g fill="none" stroke="%23E0B75C" stroke-width="1">'
+    + '<rect x="13" y="2" width="20" height="20"/>'
+    + '<rect x="13" y="2" width="20" height="20" transform="rotate(45 23 12)"/>'
+    + '<circle cx="23" cy="12" r="2.2"/><path d="M0 12h11M35 12h13"/>'
+    + '</g></svg>';
+  var fondoCelosia = 'url("data:image/svg+xml;utf8,' + svg + '")';
+  ['cel1','cel2','cel3','cel4','cel5','cel6'].forEach(function(id){
+    var e = $(id); if(e) e.style.backgroundImage = fondoCelosia;
+  });
+
+  /* ===== la foto de la quinceañera ===== */
+  $('marco').addEventListener('click', function(){ $('archivoFoto').click(); });
+  $('archivoFoto').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0];
+    if(!f || !/^image\//.test(f.type)) return;
+    var img = $('foto');
+    img.src = URL.createObjectURL(f);
+    img.hidden = false;
+    $('marcoVacio').hidden = true;
+    $('pieMarco').textContent = 'Así se verá. Toca la foto para cambiarla.';
+  });
+
+  /* ===== cuenta regresiva ===== */
+  var meta = new Date('2027-03-14T20:00:00').getTime();
+  function dos(n){ return String(n).padStart(2,'0'); }
+  function latir(){
+    var t = meta - Date.now(); if(t < 0) t = 0;
+    $('cd-d').textContent = Math.floor(t/86400000);
+    $('cd-h').textContent = dos(Math.floor(t/3600000)%24);
+    $('cd-m').textContent = dos(Math.floor(t/60000)%60);
+    $('cd-s').textContent = dos(Math.floor(t/1000)%60);
+  }
+  latir(); setInterval(latir, 1000);
+
+  /* ===== confirmación ===== */
+  function responder(asiste){
+    $('formRsvp').hidden = true;
+    $('reserva').innerHTML = asiste
+      ? 'Quedan <span class="pases">4 lugares</span> guardados con tu nombre.'
+      : 'Gracias por avisar. Se te va a extrañar.';
+    $('msgRsvp').textContent = asiste ? '✓ Confirmado. Nos vemos el 14 de marzo.' : '✓ Registrado.';
+  }
+  $('btnSi').addEventListener('click', function(){ responder(true); });
+  $('btnNo').addEventListener('click', function(){ responder(false); });
+
+  /* ===== muro de felicitaciones ===== */
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  var notas = [
+    { n:'Tía Carmen', m:'Que esta noche sea el comienzo de todo lo lindo que te falta por vivir.' },
+    { n:'Los primos', m:'Nos preparamos toda la semana para el baile. Prepárate tú.' },
+    { n:'Abuelita Rosa', m:'Quince años y ya eres toda una mujer. Te quiero, mi niña.' }
+  ];
+  function pintarMuro(){
+    $('muro').innerHTML = notas.map(function(x){
+      return '<div class="nota"><b>' + esc(x.n) + '</b><p>' + esc(x.m) + '</p></div>';
+    }).join('');
+  }
+  pintarMuro();
+  $('btnNota').addEventListener('click', function(){
+    var n = $('fNombre').value.trim(), m = $('fMensaje').value.trim();
+    if(!n || !m){ $('msgNota').textContent = 'Escribe tu nombre y un mensaje.'; return; }
+    notas.unshift({ n:n, m:m }); pintarMuro();
+    $('fNombre').value = ''; $('fMensaje').value = '';
+    $('msgNota').textContent = '✓ Publicado. Gracias.';
+  });
+
+  /* ===== galería ===== */
+  var rejilla = $('rejilla');
+  var tintas = [['#1B6F6B','#35C2B1'],['#6B4A17','#E0B75C'],['#3A1A44','#A8447C'],
+                ['#13284F','#4A7FC1'],['#5A3312','#D98A3D'],['#124A3F','#2F9C86']];
+  tintas.forEach(function(par, i){
+    var c = document.createElement('canvas'); c.width = c.height = 200;
+    c.setAttribute('role','img'); c.setAttribute('aria-label','Mosaico decorativo');
+    var g = c.getContext('2d');
+    var deg = g.createLinearGradient(0,0,200,200);
+    deg.addColorStop(0, par[0]); deg.addColorStop(1, par[1]);
+    g.fillStyle = deg; g.fillRect(0,0,200,200);
+    g.strokeStyle = 'rgba(246,222,158,.5)'; g.lineWidth = 2;
+    g.translate(100,100);
+    for(var k=0; k<2; k++){
+      g.save(); g.rotate(k*Math.PI/4);
+      var r = 46 + (i%3)*7;
+      g.strokeRect(-r,-r,r*2,r*2);
+      g.restore();
+    }
+    g.beginPath(); g.arc(0,0,8,0,Math.PI*2); g.stroke();
+    rejilla.appendChild(c);
+  });
+  $('btnElegir').addEventListener('click', function(){ $('archivo').click(); });
+  $('archivo').addEventListener('change', function(e){
+    var files = Array.prototype.slice.call(e.target.files).slice(0,6);
+    if(!files.length) return;
+    var puestos = 0;
+    files.forEach(function(f){
+      if(!/^image\//.test(f.type)) return;
+      var img = document.createElement('img');
+      img.alt = 'Foto que acabas de elegir';
+      img.src = URL.createObjectURL(f);
+      rejilla.insertBefore(img, rejilla.firstChild);
+      puestos++;
+    });
+    $('msgGal').textContent = '✓ ' + (puestos || files.length) + ' archivo(s) listos. En el sitio real se guardan para todos.';
+  });
+
+  /* ===== copiar datos ===== */
+  $('btnCopiar').addEventListener('click', function(){
+    var texto = 'María Bustos Aravena\nBanco Estado\nCuenta Vista\n000 1234 5678';
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(texto).then(
+        function(){ $('msgCopia').textContent = '✓ Datos copiados.'; },
+        function(){ $('msgCopia').textContent = 'No se pudo copiar; anótalos a mano.'; });
+    } else { $('msgCopia').textContent = 'Copia los datos a mano, por favor.'; }
+  });
+
+  /* ===== música: arpegio en escala hijaz, sintetizado ===== */
+  (function(){
+    var fab = $('fabMusica'), ctx = null, maestro = null, latido = null, paso = 0;
+    var hz = [293.66, 311.13, 369.99, 392.00, 440.00, 466.16, 554.37, 587.33];
+    var patron = [0,2,4,3,5,4,2,0, 1,3,5,4,6,5,3,1];
+    function tanir(f, t, dur, vol){
+      var osc = ctx.createOscillator(), amp = ctx.createGain();
+      osc.type = 'triangle'; osc.frequency.value = f;
+      amp.gain.setValueAtTime(0, t);
+      amp.gain.linearRampToValueAtTime(vol, t + .02);
+      amp.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      osc.connect(amp); amp.connect(maestro);
+      osc.start(t); osc.stop(t + dur + .05);
+    }
+    function pulso(){
+      var t = ctx.currentTime + .08;
+      tanir(hz[patron[paso % patron.length]], t, 1.6, .18);
+      if(paso % 4 === 0) tanir(146.83, t, 2.6, .12);
+      paso++;
+    }
+    function encender(){
+      if(!ctx){
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if(!AC) return false;
+        ctx = new AC();
+        maestro = ctx.createGain(); maestro.gain.value = 0;
+        var filtro = ctx.createBiquadFilter();
+        filtro.type = 'lowpass'; filtro.frequency.value = 2200;
+        maestro.connect(filtro); filtro.connect(ctx.destination);
+      }
+      if(ctx.state === 'suspended') ctx.resume();
+      maestro.gain.cancelScheduledValues(ctx.currentTime);
+      maestro.gain.linearRampToValueAtTime(.5, ctx.currentTime + 1.2);
+      pulso(); latido = setInterval(pulso, 900);
+      return true;
+    }
+    function apagar(){
+      clearInterval(latido); latido = null;
+      if(maestro) maestro.gain.linearRampToValueAtTime(0, ctx.currentTime + .5);
+    }
+    fab.addEventListener('click', function(){
+      if(fab.getAttribute('aria-pressed') === 'true'){ apagar(); fab.setAttribute('aria-pressed','false'); }
+      else if(encender()){ fab.setAttribute('aria-pressed','true'); }
+    });
+  })();
+
+  /* ===== el desierto: el sol se pone a medida que bajas ===== */
+  var cv = $('desierto'), cx = cv.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0;
+  var estrellas = [], fugaz = null, avance = 0;
+
+  // Cuatro momentos del día. El scroll interpola entre ellos.
+  var MOMENTOS = [
+    { p:0.00, alto:'#16405F', medio:'#4E7F96', horizonte:'#F2B65F',
+      dunas:['#9A6430','#6B3E1C','#43250F'], brillo:0, sol:{ y:.36, r:34, c:'#FFF6D8', a:1 } },
+    { p:0.38, alto:'#2A2A5C', medio:'#7E4A6E', horizonte:'#E8642F',
+      dunas:['#6E4526','#492C15','#2C170B'], brillo:0, sol:{ y:.70, r:44, c:'#FF8A38', a:1 } },
+    { p:0.68, alto:'#131A3E', medio:'#33285C', horizonte:'#A8447C',
+      dunas:['#2E2338','#1E1626','#120D18'], brillo:.55, sol:{ y:.88, r:44, c:'#FF6A2E', a:0 } },
+    { p:1.00, alto:'#050814', medio:'#0C1330', horizonte:'#1B2550',
+      dunas:['#10162E','#0A0F20','#050814'], brillo:1, sol:{ y:.95, r:44, c:'#FF6A2E', a:0 } }
+  ];
+
+  function aRGB(hex){
+    return [parseInt(hex.substr(1,2),16), parseInt(hex.substr(3,2),16), parseInt(hex.substr(5,2),16)];
+  }
+  function mezclar(a, b, t){
+    var A = aRGB(a), B = aRGB(b);
+    return 'rgb(' + Math.round(A[0]+(B[0]-A[0])*t) + ',' +
+                    Math.round(A[1]+(B[1]-A[1])*t) + ',' +
+                    Math.round(A[2]+(B[2]-A[2])*t) + ')';
+  }
+  function num(a, b, t){ return a + (b-a)*t; }
+
+  function momentoActual(p){
+    var i = 0;
+    while(i < MOMENTOS.length-2 && p > MOMENTOS[i+1].p) i++;
+    var a = MOMENTOS[i], b = MOMENTOS[i+1];
+    var t = (p - a.p) / (b.p - a.p);
+    t = Math.max(0, Math.min(1, t));
+    return {
+      alto: mezclar(a.alto, b.alto, t),
+      medio: mezclar(a.medio, b.medio, t),
+      horizonte: mezclar(a.horizonte, b.horizonte, t),
+      dunas: [ mezclar(a.dunas[0], b.dunas[0], t),
+               mezclar(a.dunas[1], b.dunas[1], t),
+               mezclar(a.dunas[2], b.dunas[2], t) ],
+      brillo: num(a.brillo, b.brillo, t),
+      sol: { y: num(a.sol.y, b.sol.y, t), r: num(a.sol.r, b.sol.r, t),
+             c: mezclar(a.sol.c, b.sol.c, t), a: num(a.sol.a, b.sol.a, t) }
+    };
+  }
+
+  // Chispa pre-renderizada para las estrellas.
+  var chispa = document.createElement('canvas'); chispa.width = chispa.height = 16;
+  var cc = chispa.getContext('2d');
+  var halo = cc.createRadialGradient(8,8,0,8,8,8);
+  halo.addColorStop(0,'rgba(255,249,228,1)');
+  halo.addColorStop(.35,'rgba(246,222,158,.5)');
+  halo.addColorStop(1,'rgba(246,222,158,0)');
+  cc.fillStyle = halo; cc.fillRect(0,0,16,16);
+
+  function medir(){
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W*dpr; cv.height = H*dpr;
+    cv.style.width = W+'px'; cv.style.height = H+'px';
+    cx.setTransform(dpr,0,0,dpr,0,0);
+    estrellas = [];
+    var n = Math.min(240, Math.round(W*H/3800));
+    for(var i=0;i<n;i++) estrellas.push({
+      x: Math.random()*W, y: Math.random()*H*.72,
+      r: Math.random()*1.7+.5, f: Math.random()*Math.PI*2, v: Math.random()*.9+.3
+    });
+  }
+
+  function leerAvance(){
+    var alto = document.documentElement.scrollHeight - window.innerHeight;
+    avance = alto > 0 ? Math.max(0, Math.min(1, window.scrollY / alto)) : 0;
+  }
+
+  function cresta(base, amp, fase, desliz){
+    // Una duna: suma de dos senos, dibujada como camino cerrado hasta el borde inferior.
+    cx.beginPath();
+    cx.moveTo(-10, H + 10);
+    for(var x = -10; x <= W + 10; x += 12){
+      var u = (x + desliz) / W;
+      var y = base + Math.sin(u*3.1 + fase)*amp + Math.sin(u*7.3 + fase*1.7)*amp*.38;
+      cx.lineTo(x, y);
+    }
+    cx.lineTo(W + 10, H + 10);
+    cx.closePath();
+    cx.fill();
+  }
+
+  function alturaCresta(x, base, amp, fase, desliz){
+    var u = (x + desliz) / W;
+    return base + Math.sin(u*3.1 + fase)*amp + Math.sin(u*7.3 + fase*1.7)*amp*.38;
+  }
+
+  function palacio(x, suelo, escala, tinta, luz){
+    // Silueta de cúpulas y alminar — el mundo de Agrabah, sin personajes.
+    cx.save();
+    cx.translate(x, suelo); cx.scale(escala, escala);
+    cx.fillStyle = tinta;
+    cx.beginPath();
+    cx.rect(-46, -30, 92, 32);                       // base
+    cx.moveTo(-46, -30); cx.arc(0, -30, 46, Math.PI, 0); // cúpula central
+    cx.rect(-64, -18, 20, 20); cx.arc(-54, -18, 10, Math.PI, 0); // cúpula izquierda
+    cx.rect(44, -18, 20, 20); cx.arc(54, -18, 10, Math.PI, 0);   // cúpula derecha
+    cx.rect(-84, -64, 13, 66); cx.arc(-77.5, -64, 6.5, Math.PI, 0); // alminar
+    cx.rect(-78.6, -78, 2.2, 14);                    // aguja
+    cx.fill();
+    if(luz > .02){
+      cx.globalAlpha = luz;
+      cx.fillStyle = '#FFD98A';
+      [[-24,-16],[-8,-16],[8,-16],[24,-16],[-77.5,-58]].forEach(function(v){
+        cx.fillRect(v[0]-1.6, v[1], 3.2, 5);
+      });
+      cx.globalAlpha = 1;
+    }
+    cx.restore();
+  }
+
+  function palmera(x, suelo, escala, tinta){
+    cx.save();
+    cx.translate(x, suelo); cx.scale(escala, escala);
+    cx.strokeStyle = tinta; cx.fillStyle = tinta;
+    cx.lineWidth = 4; cx.lineCap = 'round';
+    cx.beginPath(); cx.moveTo(0,0); cx.quadraticCurveTo(-5,-26,3,-48); cx.stroke();
+    cx.lineWidth = 3;
+    var fronda = [[-30,-56],[-20,-68],[6,-70],[26,-62],[32,-48]];
+    for(var i=0;i<fronda.length;i++){
+      cx.beginPath(); cx.moveTo(3,-48);
+      cx.quadraticCurveTo(fronda[i][0]*.55, fronda[i][1]-6, fronda[i][0], fronda[i][1]);
+      cx.stroke();
+    }
+    cx.restore();
+  }
+
+  function pintar(ms){
+    var t = ms/1000;
+    var m = momentoActual(avance);
+    var desliz = window.scrollY;
+
+    // cielo
+    var cielo = cx.createLinearGradient(0, 0, 0, H*.80);
+    cielo.addColorStop(0, m.alto);
+    cielo.addColorStop(.48, m.medio);
+    cielo.addColorStop(1, m.horizonte);
+    cx.fillStyle = cielo; cx.fillRect(0, 0, W, H);
+
+    // estrellas
+    if(m.brillo > .02){
+      for(var i=0;i<estrellas.length;i++){
+        var e = estrellas[i];
+        cx.globalAlpha = m.brillo * (.3 + .7*(.5 + .5*Math.sin(t*e.v + e.f)));
+        var lado = e.r*6.5;
+        cx.drawImage(chispa, e.x-lado/2, e.y-lado/2, lado, lado);
+      }
+      cx.globalAlpha = 1;
+    }
+
+    // sol
+    if(m.sol.a > .02){
+      var sx = W*.74, sy = H*m.sol.y;
+      var aura = cx.createRadialGradient(sx, sy, 0, sx, sy, m.sol.r*4.2);
+      aura.addColorStop(0, m.sol.c);
+      aura.addColorStop(.18, m.sol.c);
+      aura.addColorStop(1, 'rgba(255,170,70,0)');
+      cx.globalAlpha = m.sol.a;
+      cx.fillStyle = aura;
+      cx.beginPath(); cx.arc(sx, sy, m.sol.r*4.2, 0, Math.PI*2); cx.fill();
+      cx.fillStyle = m.sol.c;
+      cx.beginPath(); cx.arc(sx, sy, m.sol.r, 0, Math.PI*2); cx.fill();
+      cx.globalAlpha = 1;
+    }
+
+    // luna creciente
+    if(m.brillo > .3){
+      var la = (m.brillo - .3)/.7, lx = W*.22, ly = H*.20, lr = 26;
+      cx.globalAlpha = la;
+      cx.fillStyle = '#F8EDCE';
+      cx.beginPath(); cx.arc(lx, ly, lr, 0, Math.PI*2); cx.fill();
+      cx.globalCompositeOperation = 'destination-out';
+      cx.beginPath(); cx.arc(lx + lr*.42, ly - lr*.26, lr*.92, 0, Math.PI*2); cx.fill();
+      cx.globalCompositeOperation = 'source-over';
+      cx.globalAlpha = 1;
+    }
+
+    // estrella fugaz, solo de noche
+    if(m.brillo > .75){
+      if(!fugaz && Math.random() < .005){
+        fugaz = { x: Math.random()*W*.7, y: Math.random()*H*.35, l:0, largo: Math.random()*70+70 };
+      }
+      if(fugaz){
+        fugaz.l += 7;
+        var x1 = fugaz.x + fugaz.l, y1 = fugaz.y + fugaz.l*.5;
+        var x0 = x1 - fugaz.largo, y0 = y1 - fugaz.largo*.5;
+        var estela = cx.createLinearGradient(x0, y0, x1, y1);
+        estela.addColorStop(0, 'rgba(246,222,158,0)');
+        estela.addColorStop(1, 'rgba(255,251,233,.9)');
+        cx.strokeStyle = estela; cx.lineWidth = 1.6; cx.lineCap = 'round';
+        cx.beginPath(); cx.moveTo(x0,y0); cx.lineTo(x1,y1); cx.stroke();
+        if(x0 > W || y0 > H) fugaz = null;
+      }
+    } else { fugaz = null; }
+
+    // dunas, con el palacio y las palmeras entre capas
+    var baseLejos = H*.74, baseMedia = H*.82, baseCerca = H*.91;
+    var dLejos = desliz*.03, dMedia = desliz*.07, dCerca = desliz*.13;
+
+    cx.fillStyle = m.dunas[0];
+    cresta(baseLejos, 15, .6, dLejos);
+
+    palacio(W*.70, alturaCresta(W*.70, baseLejos, 15, .6, dLejos) + 3,
+            Math.max(.55, Math.min(1, W/720)), m.dunas[1], m.brillo);
+
+    cx.fillStyle = m.dunas[1];
+    cresta(baseMedia, 21, 2.3, dMedia);
+
+    var pieP = alturaCresta(W*.18, baseMedia, 21, 2.3, dMedia);
+    palmera(W*.15, pieP + 2, .78, m.dunas[2]);
+    palmera(W*.24, pieP + 5, .62, m.dunas[2]);
+
+    cx.fillStyle = m.dunas[2];
+    cresta(baseCerca, 27, 4.1, dCerca);
+
+    if(!lento) requestAnimationFrame(pintar);
+  }
+
+  medir();
+  leerAvance();
+
+  if(lento){
+    // Sin animación: una sola escena de crepúsculo, quieta.
+    avance = .72;
+    window.addEventListener('resize', function(){ medir(); pintar(0); });
+    pintar(0);
+  } else {
+    window.addEventListener('resize', medir);
+    window.addEventListener('scroll', leerAvance, { passive:true });
+    requestAnimationFrame(pintar);
+  }
+})();
+</script>
+</body>
+</html>
