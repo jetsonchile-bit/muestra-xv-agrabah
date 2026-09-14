@@ -59,7 +59,7 @@ p{margin:0 0 14px}
   box-shadow:0 0 0 5px rgba(8,12,30,.45), 0 0 34px rgba(224,183,92,.28), inset 0 0 26px rgba(0,0,0,.45)}
 .marco img{width:100%; height:100%; object-fit:cover; display:block}
 .marco-vacio{position:absolute; inset:0; display:grid; place-items:center; padding:16px 12px 26px}
-.lampara{width:100%; max-width:158px; height:auto; overflow:visible}
+.lampara{width:100%; max-width:170px; height:auto; overflow:visible}
 .marco:focus-visible{outline:2px solid var(--turquesa); outline-offset:5px}
 .aliento{animation:aliento 5s ease-in-out infinite}
 .humo{animation:humo 7s ease-in-out infinite}
@@ -144,61 +144,124 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
     <button class="marco" id="marco" aria-label="Poner una foto de la quinceañera">
       <img id="foto" alt="Foto de la quinceañera" hidden>
       <span class="marco-vacio" id="marcoVacio">
-        <svg class="lampara" viewBox="0 0 140 112" aria-hidden="true">
+        <svg class="lampara" viewBox="0 0 150 118" aria-hidden="true">
           <defs>
-            <linearGradient id="laton" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#FCEFC4"/>
-              <stop offset=".42" stop-color="#E0B75C"/>
-              <stop offset="1" stop-color="#8A6220"/>
+            <!-- oro del cuerpo: luz arriba-izquierda, sombra abajo-derecha y rebote al filo -->
+            <linearGradient id="oroCuerpo" x1=".14" y1="0" x2=".82" y2="1">
+              <stop offset="0" stop-color="#FFFAE6"/>
+              <stop offset=".14" stop-color="#FCE7A6"/>
+              <stop offset=".34" stop-color="#F3C95F"/>
+              <stop offset=".56" stop-color="#DDA435"/>
+              <stop offset=".76" stop-color="#A5701B"/>
+              <stop offset=".9" stop-color="#8A5C16"/>
+              <stop offset="1" stop-color="#D3A445"/>
             </linearGradient>
-            <radialGradient id="resplandor" cx="50%" cy="56%" r="50%">
-              <stop offset="0" stop-color="#FFD98A" stop-opacity=".55"/>
-              <stop offset="1" stop-color="#FFD98A" stop-opacity="0"/>
+            <linearGradient id="oroPico" x1="1" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#B8801F"/>
+              <stop offset=".34" stop-color="#F0C55C"/>
+              <stop offset=".72" stop-color="#FFEFBE"/>
+              <stop offset="1" stop-color="#FFF9E4"/>
+            </linearGradient>
+            <linearGradient id="oroTapa" x1=".2" y1="0" x2=".85" y2="1">
+              <stop offset="0" stop-color="#FFFBEC"/>
+              <stop offset=".3" stop-color="#F8D888"/>
+              <stop offset=".68" stop-color="#C9932B"/>
+              <stop offset="1" stop-color="#8A5C16"/>
+            </linearGradient>
+            <linearGradient id="oroPie" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#8A5C16"/>
+              <stop offset=".45" stop-color="#E7BC55"/>
+              <stop offset="1" stop-color="#9B6C1C"/>
+            </linearGradient>
+            <linearGradient id="oroAsa" x1="0" y1="0" x2=".6" y2="1">
+              <stop offset="0" stop-color="#FFF3CE"/>
+              <stop offset=".45" stop-color="#E4B549"/>
+              <stop offset="1" stop-color="#8A5C16"/>
+            </linearGradient>
+            <radialGradient id="reflejo" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#FFFEF6" stop-opacity=".95"/>
+              <stop offset="1" stop-color="#FFFEF6" stop-opacity="0"/>
             </radialGradient>
+            <radialGradient id="resplandor" cx="50%" cy="54%" r="50%">
+              <stop offset="0" stop-color="#FFDE97" stop-opacity=".72"/>
+              <stop offset=".5" stop-color="#FFC45E" stop-opacity=".26"/>
+              <stop offset="1" stop-color="#FFC45E" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="suave" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="2.6"/>
+            </filter>
+            <filter id="tenue" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="1.1"/>
+            </filter>
             <g id="khatam">
               <rect x="-3.2" y="-3.2" width="6.4" height="6.4"/>
               <rect x="-3.2" y="-3.2" width="6.4" height="6.4" transform="rotate(45)"/>
             </g>
           </defs>
 
-          <ellipse class="aliento" cx="70" cy="64" rx="66" ry="46" fill="url(#resplandor)"/>
-          <ellipse cx="70" cy="99" rx="30" ry="5" fill="#04060F" opacity=".45"/>
+          <ellipse class="aliento" cx="76" cy="66" rx="72" ry="50" fill="url(#resplandor)"/>
+          <ellipse cx="76" cy="105" rx="33" ry="5" fill="#04060F" opacity=".5"/>
 
-          <!-- humo que escapa del pico -->
-          <path class="humo" d="M14 32 C9 24 18 20 13 11 C10 5 17 3 21 1"
-                fill="none" stroke="#F6DE9E" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>
+          <!-- el hilo que escapa por la boquilla -->
+          <path class="humo" d="M13 27 C8 19 17 15 12 7 C9 2 15 0 19 -2"
+                fill="none" stroke="#FFE9A8" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
 
           <!-- asa en arco ojival -->
-          <path d="M96 57 C116 48 128 61 121 74 C117 82 108 85 100 82"
-                fill="none" stroke="url(#laton)" stroke-width="7" stroke-linecap="round"/>
+          <path d="M104 58 C126 49 138 63 130 77 C126 85 116 88 107 85"
+                fill="none" stroke="url(#oroAsa)" stroke-width="7.5" stroke-linecap="round"/>
+          <path d="M107 57 C124 50 133 60 130 70" fill="none" filter="url(#tenue)"
+                stroke="#FFF7DC" stroke-width="2" stroke-linecap="round" opacity=".7"/>
 
-          <!-- pico recto con boca abocinada -->
-          <path d="M39 56 C27 54 16 47 8 38 L19 32 C25 42 32 49 41 52 Z" fill="url(#laton)"/>
+          <!-- pico afinado hasta la punta, con su boquilla -->
+          <path d="M47 57 C34 55 21 45 12 29 L17 32 C26 46 38 57 50 72 Z"
+                fill="url(#oroPico)" stroke="#7A5415" stroke-width=".7" stroke-opacity=".5"/>
+          <path d="M44 58 C33 55 22 45 14 31" fill="none" filter="url(#tenue)"
+                stroke="#FFFDF0" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+          <ellipse cx="14.5" cy="30.5" rx="2.9" ry="1.9" transform="rotate(-58 14.5 30.5)" fill="#5E3F12"/>
+          <circle cx="13.6" cy="29.4" r="1.5" fill="#FFFBE8" opacity=".95"/>
 
           <!-- cuerpo -->
-          <path d="M36 65 C36 52 48 45 70 45 C92 45 102 52 102 65 C102 79 90 87 70 87
-                   C50 87 36 79 36 65 Z" fill="url(#laton)"/>
-          <path d="M53 87 L87 87 L91 94 Q70 99 49 94 Z" fill="url(#laton)"/>
-
-          <!-- tapa con cúpula y aguja, como el alminar del horizonte -->
-          <path d="M57 46 C57 36 63 31 70 31 C77 31 83 36 83 46 Z" fill="url(#laton)"/>
-          <path d="M68 31 L68 24 Q70 20 72 24 L72 31 Z" fill="url(#laton)"/>
-          <circle cx="70" cy="19" r="2.8" fill="#F6DE9E"/>
+          <path d="M44 70 C44 56 56 48 76 48 C96 48 108 56 108 70
+                   C108 85 95 94 76 94 C57 94 44 85 44 70 Z"
+                fill="url(#oroCuerpo)" stroke="#7A5415" stroke-width=".8" stroke-opacity=".45"/>
+          <!-- rebote de luz en el filo inferior: lo que hace que parezca metal -->
+          <path d="M50 82 C58 91 94 91 103 81" fill="none" filter="url(#tenue)"
+                stroke="#FFD98A" stroke-width="2.6" stroke-linecap="round" opacity=".75"/>
+          <!-- luz especular -->
+          <ellipse cx="62" cy="60" rx="15" ry="8.5" transform="rotate(-24 62 60)"
+                   fill="url(#reflejo)" filter="url(#suave)"/>
+          <ellipse cx="88" cy="58" rx="5" ry="2.6" transform="rotate(-16 88 58)"
+                   fill="#FFFDF2" filter="url(#tenue)" opacity=".7"/>
 
           <!-- grabados -->
-          <g fill="none" stroke="#5E3F12" stroke-width="1.3" opacity=".62">
-            <path d="M40 60 C54 67 86 67 99 60"/>
-            <path d="M44 76 C56 82 84 82 96 76"/>
+          <g fill="none" stroke="#6B4A12" stroke-width="1.3" opacity=".5">
+            <path d="M48 66 C62 73 92 73 105 66"/>
+            <path d="M52 82 C63 88 90 88 101 82"/>
           </g>
-          <g fill="none" stroke="#5E3F12" stroke-width="1.1" opacity=".55">
-            <use href="#khatam" x="57" y="69"/>
-            <use href="#khatam" x="70" y="70"/>
-            <use href="#khatam" x="83" y="69"/>
+          <g fill="none" stroke="#6B4A12" stroke-width="1.1" opacity=".45">
+            <use href="#khatam" x="63" y="75"/>
+            <use href="#khatam" x="76" y="76"/>
+            <use href="#khatam" x="89" y="75"/>
           </g>
 
-          <!-- lustre del latón pulido -->
-          <path class="lustre" d="M46 57 C52 51 62 49 72 50" fill="none"
-                stroke="#FFF8E0" stroke-width="4" stroke-linecap="round" opacity=".16"/>
+          <!-- pie -->
+          <path d="M60 93 L92 93 L97 102 Q76 107 55 102 Z"
+                fill="url(#oroPie)" stroke="#7A5415" stroke-width=".7" stroke-opacity=".45"/>
+          <path d="M60 99 Q76 103 92 99" fill="none" stroke="#FFE7A8" stroke-width="1.4"
+                stroke-linecap="round" opacity=".55"/>
+
+          <!-- tapa con cúpula y aguja, como el alminar del horizonte -->
+          <path d="M64 49 C64 39 69 33 76 33 C83 33 88 39 88 49 Z"
+                fill="url(#oroTapa)" stroke="#7A5415" stroke-width=".7" stroke-opacity=".45"/>
+          <path d="M69 46 C69 39 72 36 75 35" fill="none" filter="url(#tenue)"
+                stroke="#FFFDF0" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+          <path d="M74 33 L74 26 Q76 22 78 26 L78 33 Z" fill="url(#oroTapa)"/>
+          <circle cx="76" cy="20" r="3.1" fill="#F7D583"/>
+          <circle cx="75.1" cy="19" r="1.2" fill="#FFFDF2" opacity=".9"/>
+
+          <!-- lustre del oro pulido -->
+          <path class="lustre" d="M54 62 C60 54 70 51 82 52" fill="none" filter="url(#tenue)"
+                stroke="#FFFCEC" stroke-width="4.5" stroke-linecap="round" opacity=".16"/>
         </svg>
       </span>
     </button>
@@ -574,43 +637,110 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
     return base + Math.sin(u*3.1 + fase)*amp + Math.sin(u*7.3 + fase*1.7)*amp*.38;
   }
 
+  function cupula(g, x, y, w, h){
+    // Cúpula de cebolla: se abomba y termina en punta.
+    var m = w/2;
+    g.moveTo(x-m, y);
+    g.bezierCurveTo(x-m*1.20, y-h*.40, x-m*.64, y-h*.80, x, y-h);
+    g.bezierCurveTo(x+m*.64, y-h*.80, x+m*1.20, y-h*.40, x+m, y);
+    g.closePath();
+  }
+
+  function arco(g, x, y, w, h){
+    // Arco apuntado: el vano de todas las puertas y ventanas del palacio.
+    var m = w/2, hombro = y - h*.52;
+    g.moveTo(x-m, y);
+    g.lineTo(x-m, hombro);
+    g.quadraticCurveTo(x-m, y-h*.9, x, y-h);
+    g.quadraticCurveTo(x+m, y-h*.9, x+m, hombro);
+    g.lineTo(x+m, y);
+    g.closePath();
+  }
+
   function palacio(x, suelo, escala, tinta, luz){
-    // Silueta de cúpulas y alminar — el mundo de Agrabah, sin personajes.
+    // Palacio de cúpulas, alminares y arcos — el mundo de Agrabah, sin personajes.
     cx.save();
     cx.translate(x, suelo); cx.scale(escala, escala);
+
     cx.fillStyle = tinta;
     cx.beginPath();
-    cx.rect(-46, -30, 92, 32);                       // base
-    cx.moveTo(-46, -30); cx.arc(0, -30, 46, Math.PI, 0); // cúpula central
-    cx.rect(-64, -18, 20, 20); cx.arc(-54, -18, 10, Math.PI, 0); // cúpula izquierda
-    cx.rect(44, -18, 20, 20); cx.arc(54, -18, 10, Math.PI, 0);   // cúpula derecha
-    cx.rect(-84, -64, 13, 66); cx.arc(-77.5, -64, 6.5, Math.PI, 0); // alminar
-    cx.rect(-78.6, -78, 2.2, 14);                    // aguja
+
+    cx.rect(-112, -13, 224, 15);                 // terraza
+    cx.rect(-58, -46, 116, 34);                  // cuerpo central
+    cupula(cx, 0, -46, 62, 52);                  // cúpula mayor
+    cx.rect(-1.6, -110, 3.2, 14);                // aguja de la cúpula mayor
+
+    cx.rect(-88, -34, 30, 22);                   // torre izquierda
+    cupula(cx, -73, -34, 34, 27);
+    cx.rect(-74.2, -70, 2.4, 10);
+    cx.rect(58, -34, 30, 22);                    // torre derecha
+    cupula(cx, 73, -34, 34, 27);
+    cx.rect(71.8, -70, 2.4, 10);
+
+    cx.rect(-36, -60, 18, 16);                   // cupulines del cuerpo
+    cupula(cx, -27, -60, 22, 18);
+    cx.rect(18, -60, 18, 16);
+    cupula(cx, 27, -60, 22, 18);
+
+    [-108, 108].forEach(function(mx){             // alminares
+      cx.rect(mx-6.5, -86, 13, 88);
+      cx.rect(mx-10, -60, 20, 5);                 // balcón
+      cupula(cx, mx, -86, 17, 16);
+      cx.rect(mx-1.2, -112, 2.4, 11);
+    });
+
     cx.fill();
+
     if(luz > .02){
-      cx.globalAlpha = luz;
+      // Vanos encendidos al caer la noche.
+      cx.globalAlpha = luz * .9;
       cx.fillStyle = '#FFD98A';
-      [[-24,-16],[-8,-16],[8,-16],[24,-16],[-77.5,-58]].forEach(function(v){
-        cx.fillRect(v[0]-1.6, v[1], 3.2, 5);
-      });
+      cx.beginPath();
+      arco(cx, 0, -13, 17, 30);                                   // portón
+      [-40, -22, 22, 40].forEach(function(vx){ arco(cx, vx, -18, 8, 15); });
+      [-73, 73].forEach(function(vx){ arco(cx, vx, -16, 8, 13); });
+      [-108, 108].forEach(function(mx){ arco(cx, mx, -62, 6, 11); });
+      cx.fill();
       cx.globalAlpha = 1;
     }
     cx.restore();
   }
 
-  function palmera(x, suelo, escala, tinta){
+  function palmera(x, suelo, escala, tinta, semilla){
     cx.save();
     cx.translate(x, suelo); cx.scale(escala, escala);
-    cx.strokeStyle = tinta; cx.fillStyle = tinta;
-    cx.lineWidth = 4; cx.lineCap = 'round';
-    cx.beginPath(); cx.moveTo(0,0); cx.quadraticCurveTo(-5,-26,3,-48); cx.stroke();
-    cx.lineWidth = 3;
-    var fronda = [[-30,-56],[-20,-68],[6,-70],[26,-62],[32,-48]];
-    for(var i=0;i<fronda.length;i++){
-      cx.beginPath(); cx.moveTo(3,-48);
-      cx.quadraticCurveTo(fronda[i][0]*.55, fronda[i][1]-6, fronda[i][0], fronda[i][1]);
-      cx.stroke();
+    cx.fillStyle = tinta;
+
+    // Tronco: cónico y curvado, no una línea.
+    cx.beginPath();
+    cx.moveTo(-5.4, 0);
+    cx.bezierCurveTo(-4.2, -22, -2.4, -38, .6, -52);
+    cx.lineTo(5.2, -51.2);
+    cx.bezierCurveTo(3.2, -38, 3.8, -22, 5.4, 0);
+    cx.closePath();
+    cx.fill();
+
+    // Copa: nueve frondas que se abren y caen por la punta.
+    cx.translate(2.6, -52);
+    var grados = [-176, -152, -128, -104, -80, -56, -32, -8, 8];
+    for(var i=0;i<grados.length;i++){
+      var borde = (i === 0 || i === grados.length-1);
+      var largo = (borde ? 40 : 34) + Math.sin(i*2.3 + semilla)*5;
+      var ancho = borde ? 9 : 11;
+      cx.save();
+      cx.rotate(grados[i] * Math.PI/180);
+      cx.beginPath();
+      cx.moveTo(0, 0);
+      cx.quadraticCurveTo(largo*.52, -ancho*1.05, largo, ancho*.22);
+      cx.quadraticCurveTo(largo*.5, ancho*.5, 0, ancho*.3);
+      cx.closePath();
+      cx.fill();
+      cx.restore();
     }
+    // Racimo de dátiles bajo la copa.
+    [[-5,4],[1,6],[6,3]].forEach(function(d){
+      cx.beginPath(); cx.arc(d[0], d[1], 2.6, 0, Math.PI*2); cx.fill();
+    });
     cx.restore();
   }
 
@@ -686,18 +816,22 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
     var baseLejos = H*.74, baseMedia = H*.82, baseCerca = H*.91;
     var dLejos = desliz*.03, dMedia = desliz*.07, dCerca = desliz*.13;
 
+    var esc = Math.max(.5, Math.min(1, W/620));
+
     cx.fillStyle = m.dunas[0];
     cresta(baseLejos, 15, .6, dLejos);
 
     palacio(W*.70, alturaCresta(W*.70, baseLejos, 15, .6, dLejos) + 3,
-            Math.max(.55, Math.min(1, W/720)), m.dunas[1], m.brillo);
+            esc, m.dunas[1], m.brillo);
 
     cx.fillStyle = m.dunas[1];
     cresta(baseMedia, 21, 2.3, dMedia);
 
-    var pieP = alturaCresta(W*.18, baseMedia, 21, 2.3, dMedia);
-    palmera(W*.15, pieP + 2, .78, m.dunas[2]);
-    palmera(W*.24, pieP + 5, .62, m.dunas[2]);
+    // Un palmeral de tres, a distintas alturas de la duna.
+    [[.12, .86, 0, 3], [.21, .62, 1.4, 6], [.29, .72, 2.8, 4]].forEach(function(p){
+      palmera(W*p[0], alturaCresta(W*p[0], baseMedia, 21, 2.3, dMedia) + p[3],
+              esc*p[1], m.dunas[2], p[2]);
+    });
 
     cx.fillStyle = m.dunas[2];
     cresta(baseCerca, 27, 4.1, dCerca);
