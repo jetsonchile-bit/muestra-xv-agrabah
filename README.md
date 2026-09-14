@@ -10,3 +10,9 @@ Todos los datos son inventados: nombre, salón, dirección y cuenta bancaria no 
 - La música es un arpegio en escala *hijaz* sintetizado con Web Audio; no hay archivo ni licencia de por medio.
 
 Sin personajes, arte ni tipografías de terceros.
+
+## Vista previa del enlace
+
+`og.jpg` (1200×630) e `icono-*.png` se generan con `generar_imagenes.py`, que redibuja
+la misma escena de la invitación con las tipografías reales del sitio
+(Tangerine, Cinzel y Amiri, licencia OFL).
