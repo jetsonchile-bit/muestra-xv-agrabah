@@ -28,7 +28,7 @@
 :root{
   --noche:#080B1E; --velo:rgba(14,20,44,.72); --turquesa:#35C2B1;
   --oro:#E0B75C; --oro-claro:#F6DE9E; --marfil:#F6EEDD; --tenue:#AFB9CE;
-  --linea:rgba(224,183,92,.28); --sombra:0 1px 14px rgba(4,6,16,.8);
+  --linea:rgba(224,183,92,.28); --sombra:0 1px 3px rgba(4,6,16,.8), 0 2px 18px rgba(4,6,16,.85);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -595,17 +595,17 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
     { p:0.00, alto:'#16405F', medio:'#4E7F96', horizonte:'#F2B65F',
       dunas:['#C08A46','#9A6A2E','#6B4718'],
       piedra:'#F6E3B4', sombra:'#B08A55', remate:'#FFF3D0',
-      agua:'#4FB3C6', aguaHonda:'#1E6E86', verde:'#4C9247', verdeHondo:'#2C5F2E',
+      agua:'#2F8EA6', aguaHonda:'#14556A', verde:'#4C9247', verdeHondo:'#2C5F2E',
       gente:'#4A3018', brillo:0, sol:{ y:.34, r:32, c:'#FFF6D8', a:1 } },
     { p:0.38, alto:'#2A2A5C', medio:'#7E4A6E', horizonte:'#E8642F',
       dunas:['#9C5E38','#6E3C22','#3F2012'],
       piedra:'#F0BE8A', sombra:'#96573F', remate:'#FFD9A0',
-      agua:'#C97A5E', aguaHonda:'#6B3A45', verde:'#3E6F3C', verdeHondo:'#23441F',
+      agua:'#A85C46', aguaHonda:'#4E2A34', verde:'#3E6F3C', verdeHondo:'#23441F',
       gente:'#38210F', brillo:0, sol:{ y:.70, r:44, c:'#FF8A38', a:1 } },
     { p:0.68, alto:'#131A3E', medio:'#33285C', horizonte:'#A8447C',
       dunas:['#4A3550','#2E2338','#181120'],
       piedra:'#A98BA0', sombra:'#5B4463', remate:'#F3C489',
-      agua:'#6A4472', aguaHonda:'#2C1C3E', verde:'#2C4A48', verdeHondo:'#182C2E',
+      agua:'#503457', aguaHonda:'#20142E', verde:'#2C4A48', verdeHondo:'#182C2E',
       gente:'#241428', brillo:.55, sol:{ y:.88, r:44, c:'#FF6A2E', a:0 } },
     { p:1.00, alto:'#050814', medio:'#0C1330', horizonte:'#1B2550',
       dunas:['#18203C','#0F1528', '#070B16'],
@@ -969,9 +969,9 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
     var m = momentoActual(avance);
     var desliz = window.scrollY;
 
-    var yOrilla = H*.70;            // orilla lejana: donde se asienta el palacio
-    var yCerca  = H*.855;           // orilla cercana: donde baila la gente
-    var esc = Math.max(.4, Math.min(1.9, W/380));
+    var yOrilla = H*.755;           // orilla lejana: donde se asienta el palacio
+    var yCerca  = H*.905;           // orilla cercana: donde baila la gente
+    var esc = Math.max(.38, Math.min(1.7, W/430));
 
     // ---- cielo
     var cielo = cx.createLinearGradient(0, 0, 0, H*.74);
@@ -1038,9 +1038,9 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
 
     // ---- duna del fondo y bruma del horizonte
     cx.fillStyle = m.dunas[0];
-    cresta(cx, H*.665, H*.016, .6, desliz*.02);
+    cresta(cx, H*.725, H*.016, .6, desliz*.02);
     cx.fillStyle = velo(m, 'horizonte', .3);
-    cx.fillRect(0, H*.60, W, H*.12);
+    cx.fillRect(0, H*.655, W, H*.12);
 
     // ---- palacio y palmeral del fondo (guardados en caché)
     asegurarFondo(m, yOrilla, esc);
@@ -1066,9 +1066,9 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
     cx.setTransform(dpr,0,0,dpr,0,0);
     cx.globalAlpha = 1;
     // ondas que rompen el reflejo
-    cx.strokeStyle = velo(m, 'agua', .5); cx.lineWidth = 1.6;
-    for(var k=0; k<16; k++){
-      var yo = yOrilla + (k+.5)/16 * altoAgua;
+    cx.strokeStyle = velo(m, 'agua', .3); cx.lineWidth = 1.4;
+    for(var k=0; k<11; k++){
+      var yo = yOrilla + (k+.5)/11 * altoAgua;
       var vai = Math.sin(t*.9 + k*.8) * (3 + k*.7);
       cx.beginPath();
       cx.moveTo(-10 + vai, yo); cx.lineTo(W + 10 + vai, yo); cx.stroke();
@@ -1076,7 +1076,7 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
     cx.restore();
 
     // camino de luz del sol o de la luna sobre el agua
-    var fx = m.sol.a > .3 ? sx : lx, fa = m.sol.a > .3 ? .5 : m.brillo*.45;
+    var fx = m.sol.a > .3 ? sx : lx, fa = m.sol.a > .3 ? .3 : m.brillo*.3;
     if(fa > .04){
       cx.save();
       cx.beginPath(); cx.rect(0, yOrilla, W, altoAgua); cx.clip();
@@ -1113,14 +1113,14 @@ footer{text-align:center; padding-block:46px 96px; position:relative; z-index:1}
     // ---- la gente que baila
     for(var d=0; d<CUADRILLA.length; d++){
       var b = CUADRILLA[d];
-      var bx = W*b.x, by = yCerca + 16 + Math.sin(b.x*9)*3;
+      var bx = W*b.x, by = yCerca + 13 + Math.sin(b.x*9)*3;
       if(b.m) bailarina(cx, m, bx, by, esc*b.e*.62, t, b.f, m.brillo);
       else bailarin(cx, m, bx, by, esc*b.e*.62, t, b.f, !!b.tambor, m.brillo);
     }
 
     // ---- duna del primer plano
     cx.fillStyle = m.dunas[2];
-    cresta(cx, H*.945, H*.022, 4.1, desliz*.1);
+    cresta(cx, H*.978, H*.02, 4.1, desliz*.1);
 
     if(!lento) requestAnimationFrame(pintar);
   }
